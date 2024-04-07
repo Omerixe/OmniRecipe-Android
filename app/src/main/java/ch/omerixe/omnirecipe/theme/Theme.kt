@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.ui.theme
+package ch.omerixe.omnirecipe.theme
 
 import android.app.Activity
 import android.os.Build
@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -24,7 +25,9 @@ private val DarkColorScheme = darkColorScheme(
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40
+    tertiary = Pink40,
+    background = Color(0xFFFFFFFF),
+    surface = Color(0xFFFFFFFF),
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -41,7 +44,7 @@ private val LightColorScheme = lightColorScheme(
 fun OmniRecipeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OmniRecipe</string>
+    <string name="overview_heading">All Recipes</string>
 </resources>

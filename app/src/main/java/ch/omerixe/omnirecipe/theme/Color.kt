@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.ui.theme
+package ch.omerixe.omnirecipe.theme
 
 import androidx.compose.ui.graphics.Color
 
