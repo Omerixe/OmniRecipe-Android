@@ -1,9 +1,10 @@
 package ch.omerixe.omnirecipe.overview.ui
 
 data class RecipeOverview(
+    val id: String,
     val title: String,
     val subtitle: String,
-    val imageUrl: RecipeImage
+    val recipeImage: RecipeImage
 )
 
 sealed class RecipeImage {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -22,25 +23,26 @@ import ch.omerixe.omnirecipe.R
 import ch.omerixe.omnirecipe.theme.OmniRecipeTheme
 import coil.compose.AsyncImage
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecipeCard(
-    title: String,
-    subtitle: String,
-    recipeImage: RecipeImage,
-    modifier: Modifier = Modifier
+    recipeOverview: RecipeOverview,
+    modifier: Modifier = Modifier,
+    action: (String) -> Unit = {}
 ) {
     OutlinedCard(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+        onClick = { action(recipeOverview.id) },
         modifier = modifier
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
             val (image, text) = createRefs()
 
             AsyncImage(
-                model = recipeImage.imageModel(),
+                model = recipeOverview.recipeImage.imageModel(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.constrainAs(image) {
@@ -60,14 +62,14 @@ fun RecipeCard(
                 width = Dimension.fillToConstraints
             }) {
                 Text(
-                    title,
+                    recipeOverview.title,
                     style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Start,
                     modifier = Modifier.padding(top = 8.dp),
                     maxLines = 2
                 )
                 Text(
-                    subtitle,
+                    recipeOverview.subtitle,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
@@ -92,9 +94,12 @@ private fun RecipeImage.imageModel(): Any {
 fun PreviewRecipeCard() {
     OmniRecipeTheme {
         RecipeCard(
-            title = "Banana Bread",
-            subtitle = "This is a delicious banana bread recipe",
-            recipeImage = RecipeImage.Internal(R.drawable.banana),
+            recipeOverview = RecipeOverview(
+                "1",
+                "Test Recipe 1",
+                "Subtitle 1",
+                RecipeImage.Internal(R.drawable.banana)
+            ),
             modifier = Modifier.padding(
                 start = 16.dp,
                 top = 0.dp,

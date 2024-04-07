@@ -1,5 +1,6 @@
 package ch.omerixe.omnirecipe.overview.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -20,16 +21,19 @@ import ch.omerixe.omnirecipe.theme.OmniRecipeTheme
 fun OverviewScreen() {
     val recipes = listOf(
         RecipeOverview(
+            "1",
             "Test Recipe 1",
             "Subtitle 1",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
+            "2",
             "Test Recipe 2",
             "Subtitle 2",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
+            "3",
             "Test Recipe 3",
             "Subtitle 3",
             RecipeImage.Internal(R.drawable.banana)
@@ -46,11 +50,9 @@ fun OverviewScreen() {
             }
         }
         items(recipes) { recipe ->
-            RecipeCard(
-                title = recipe.title,
-                subtitle = recipe.subtitle,
-                recipeImage = recipe.imageUrl
-            )
+            RecipeCard(recipeOverview = recipe) { recipeId ->
+                Log.d("OverviewScreen", "Recipe clicked: $recipeId")
+            }
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
