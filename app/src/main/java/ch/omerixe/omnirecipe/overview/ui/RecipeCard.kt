@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import ch.omerixe.omnirecipe.R
+import ch.omerixe.omnirecipe.shared.ui.RecipeImage
+import ch.omerixe.omnirecipe.shared.ui.imageModel
 import ch.omerixe.omnirecipe.theme.OmniRecipeTheme
 import coil.compose.AsyncImage
 
@@ -79,13 +81,6 @@ fun RecipeCard(
             }
 
         }
-    }
-}
-
-private fun RecipeImage.imageModel(): Any {
-    return when (this) {
-        is RecipeImage.External -> url
-        is RecipeImage.Internal -> resId
     }
 }
 

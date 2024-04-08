@@ -1,13 +1,10 @@
 package ch.omerixe.omnirecipe.overview.ui
 
+import ch.omerixe.omnirecipe.shared.ui.RecipeImage
+
 data class RecipeOverview(
     val id: String,
     val title: String,
     val subtitle: String,
     val recipeImage: RecipeImage
 )
-
-sealed class RecipeImage {
-    data class External(val url: String) : RecipeImage()
-    data class Internal(val resId: Int) : RecipeImage()
-}
