@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ch.omerixe.omnirecipe.R
 import ch.omerixe.omnirecipe.shared.ui.RecipeImage
-import ch.omerixe.omnirecipe.theme.OmniRecipeTheme
+import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
 
 @Composable
 fun OverviewScreen() {

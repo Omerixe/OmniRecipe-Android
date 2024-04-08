@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.theme
+package ch.omerixe.omnirecipe.shared.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

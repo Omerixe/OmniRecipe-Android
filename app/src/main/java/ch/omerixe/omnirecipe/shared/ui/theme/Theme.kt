@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.theme
+package ch.omerixe.omnirecipe.shared.ui.theme
 
 import android.app.Activity
 import android.os.Build

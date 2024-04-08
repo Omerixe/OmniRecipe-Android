@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import ch.omerixe.omnirecipe.overview.ui.OverviewScreen
-import ch.omerixe.omnirecipe.theme.OmniRecipeTheme
+import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
