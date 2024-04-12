@@ -1,6 +1,7 @@
 package ch.omerixe.omnirecipe.overview.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -55,13 +56,7 @@ fun RecipeCard(
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
             )
-            Text(
-                text = recipeOverview.subtitle,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
-            )
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
@@ -74,7 +69,6 @@ fun PreviewRecipeCard() {
             recipeOverview = RecipeOverview(
                 "1",
                 "Test Recipe 1",
-                "Subtitle 1",
                 RecipeImage.Internal(R.drawable.banana)
             ),
             modifier = Modifier.padding(

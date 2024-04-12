@@ -5,6 +5,5 @@ import ch.omerixe.omnirecipe.shared.ui.RecipeImage
 data class RecipeOverview(
     val id: String,
     val title: String,
-    val subtitle: String,
     val recipeImage: RecipeImage
 )

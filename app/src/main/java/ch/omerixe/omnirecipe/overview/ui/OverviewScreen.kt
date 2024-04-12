@@ -1,5 +1,6 @@
 package ch.omerixe.omnirecipe.overview.ui
 
+import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,31 +30,26 @@ fun OverviewScreen() {
         RecipeOverview(
             "1",
             "Test Recipe 1",
-            "Subtitle 1",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
             "2",
             "Test Recipe 2",
-            "Subtitle 2",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
             "3",
             "Test Recipe 3",
-            "Subtitle 3",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
             "4",
             "Test Recipe 4",
-            "Subtitle 4",
             RecipeImage.Internal(R.drawable.banana)
         ),
         RecipeOverview(
             "5",
             "Test Recipe 5",
-            "Subtitle 5",
             RecipeImage.Internal(R.drawable.banana)
         ),
     )
@@ -87,11 +84,14 @@ private fun LazyGridScope.header(
 
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
 @Preview(device = "spec:parent=pixel_5,orientation=landscape")
 @Composable
 fun PreviewOverviewScreen() {
     OmniRecipeTheme {
-        OverviewScreen()
+        Surface(color = MaterialTheme.colorScheme.background) {
+            OverviewScreen()
+        }
     }
 }
 
