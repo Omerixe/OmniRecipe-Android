@@ -1,24 +1,22 @@
 package ch.omerixe.omnirecipe.overview.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import ch.omerixe.omnirecipe.R
 import ch.omerixe.omnirecipe.shared.ui.RecipeImage
 import ch.omerixe.omnirecipe.shared.ui.imageModel
@@ -32,54 +30,38 @@ fun RecipeCard(
     modifier: Modifier = Modifier,
     action: (String) -> Unit = {}
 ) {
-    OutlinedCard(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
         ),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         onClick = { action(recipeOverview.id) },
         modifier = modifier
     ) {
-        ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
-            val (image, text) = createRefs()
-
+        Column {
             AsyncImage(
                 model = recipeOverview.recipeImage.imageModel(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.constrainAs(image) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    bottom.linkTo(parent.bottom)
-                    width = Dimension.percent(0.25f)
-                    height = Dimension.fillToConstraints
-                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
                 placeholder = painterResource(id = R.drawable.banana),
             )
-
-            Column(modifier = Modifier.constrainAs(text) {
-                top.linkTo(parent.top)
-                start.linkTo(image.end, margin = 8.dp)
-                end.linkTo(parent.end)
-                width = Dimension.fillToConstraints
-            }) {
-                Text(
-                    recipeOverview.title,
-                    style = MaterialTheme.typography.headlineSmall,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(top = 8.dp),
-                    maxLines = 2
-                )
-                Text(
-                    recipeOverview.subtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
-                )
-            }
-
+            Text(
+                text = recipeOverview.title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+            )
+            Text(
+                text = recipeOverview.subtitle,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+            )
         }
     }
 }
