@@ -38,10 +38,16 @@ internal class OverviewViewModel @Inject constructor() : ViewModel() {
         ),
     )
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Content(recipes))
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
 
+    init {
+        // Simulate receiving the recipes from a network request
+        _uiState.value = UiState.Content(recipes)
+    }
+
     sealed class UiState {
+        data object Loading : UiState()
         data class Content(val recipes: List<RecipeOverview>) : UiState()
     }
 }

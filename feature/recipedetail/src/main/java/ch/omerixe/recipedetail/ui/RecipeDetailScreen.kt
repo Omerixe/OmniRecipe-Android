@@ -1,6 +1,7 @@
 package ch.omerixe.recipedetail.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,8 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ch.omerixe.ui.RecipeImage
+import ch.omerixe.ui.Loading
 import ch.omerixe.ui.R
+import ch.omerixe.ui.RecipeImage
 import ch.omerixe.ui.imageModel
 import coil.compose.AsyncImage
 
@@ -50,74 +52,85 @@ internal fun RecipeDetailScreen(
         }
     ) { padding ->
         when (uiState) {
+            is RecipeDetailViewModel.UiState.Loading -> {
+                Loading()
+            }
             is RecipeDetailViewModel.UiState.Content -> {
-                val recipeDetail = uiState.recipeDetail
-                Column(modifier = Modifier.padding(padding)) {
-                    AsyncImage(
-                        model = recipeDetail.recipeImage.imageModel(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        placeholder = painterResource(id = R.drawable.banana),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp)
-                    )
-                    Column(modifier = Modifier.padding(16.dp)) {
+                RecipeDetail(uiState, padding)
+            }
+        }
+    }
+}
+
+@Composable
+private fun RecipeDetail(
+    uiState: RecipeDetailViewModel.UiState.Content,
+    padding: PaddingValues
+) {
+    val recipeDetail = uiState.recipeDetail
+    Column(modifier = Modifier.padding(padding)) {
+        AsyncImage(
+            model = recipeDetail.recipeImage.imageModel(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.banana),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        )
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = recipeDetail.title,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Text(
+                text = recipeDetail.subtitle,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = stringResource(R.string.detail_ingredients_heading),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Row {
+                Column {
+                    recipeDetail.ingredients.forEach { ingredient ->
                         Text(
-                            text = recipeDetail.title,
-                            style = MaterialTheme.typography.titleLarge,
-                        )
-                        Text(
-                            text = recipeDetail.subtitle,
+                            text = ingredient.quantity,
                             style = MaterialTheme.typography.bodyMedium,
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = stringResource(R.string.detail_ingredients_heading),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        Row {
-                            Column {
-                                recipeDetail.ingredients.forEach { ingredient ->
-                                    Text(
-                                        text = ingredient.quantity,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Column {
-                                recipeDetail.ingredients.forEach { ingredient ->
-                                    Text(
-                                        text = ingredient.unit,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Column {
-                                recipeDetail.ingredients.forEach { ingredient ->
-                                    Text(
-                                        text = ingredient.name,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                }
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = stringResource(R.string.detail_steps_heading),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        recipeDetail.steps.forEachIndexed { index, step ->
-                            Text(
-                                text = "${index + 1}. $step",
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
                     }
                 }
+                Spacer(modifier = Modifier.width(8.dp))
+                Column {
+                    recipeDetail.ingredients.forEach { ingredient ->
+                        Text(
+                            text = ingredient.unit,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Column {
+                    recipeDetail.ingredients.forEach { ingredient ->
+                        Text(
+                            text = ingredient.name,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = stringResource(R.string.detail_steps_heading),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            recipeDetail.steps.forEachIndexed { index, step ->
+                Text(
+                    text = "${index + 1}. $step",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
             }
         }
     }

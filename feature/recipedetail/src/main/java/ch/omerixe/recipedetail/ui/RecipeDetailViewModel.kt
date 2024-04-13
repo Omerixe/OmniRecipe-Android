@@ -32,11 +32,16 @@ class RecipeDetailViewModel @Inject constructor (
         ),
     )
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Content(recipeDetail))
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
 
+    init {
+        // Simulate receiving the recipe detail from a network request
+        _uiState.value = UiState.Content(recipeDetail)
+    }
 
     sealed class UiState {
+        data object Loading : UiState()
         data class Content(val recipeDetail: RecipeDetail) : UiState()
     }
 }
