@@ -3,4 +3,5 @@
     <string name="overview_heading">All Recipes</string>
     <string name="detail_ingredients_heading">Ingredients</string>
     <string name="detail_steps_heading">Steps</string>
+    <string name="navigate_up_description">Back</string>
 </resources>

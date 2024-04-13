@@ -25,7 +25,9 @@ import ch.omerixe.omnirecipe.shared.ui.RecipeImage
 import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
 
 @Composable
-fun OverviewScreen() {
+fun OverviewScreen(
+    onNavigateToRecipeDetail: (recipeId: String) -> Unit
+) {
     val recipes = listOf(
         RecipeOverview(
             "1",
@@ -71,6 +73,7 @@ fun OverviewScreen() {
         items(recipes) { recipe ->
             RecipeCard(recipeOverview = recipe) { recipeId ->
                 Log.d("OverviewScreen", "Recipe clicked: $recipeId")
+                onNavigateToRecipeDetail(recipeId)
             }
         }
     }
@@ -90,7 +93,7 @@ private fun LazyGridScope.header(
 fun PreviewOverviewScreen() {
     OmniRecipeTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
-            OverviewScreen()
+            OverviewScreen({})
         }
     }
 }
