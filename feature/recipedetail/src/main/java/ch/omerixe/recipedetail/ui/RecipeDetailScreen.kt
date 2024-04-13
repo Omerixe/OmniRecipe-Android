@@ -55,6 +55,7 @@ internal fun RecipeDetailScreen(
             is RecipeDetailViewModel.UiState.Loading -> {
                 Loading()
             }
+
             is RecipeDetailViewModel.UiState.Content -> {
                 RecipeDetail(uiState, padding)
             }

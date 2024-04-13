@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class RecipeDetailViewModel @Inject constructor (
+class RecipeDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
     private val recipeId: String = RecipeArgs(savedStateHandle).recipeId
 
     private val recipeDetail = RecipeDetail(

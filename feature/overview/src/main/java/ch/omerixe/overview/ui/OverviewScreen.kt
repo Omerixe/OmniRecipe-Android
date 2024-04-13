@@ -33,6 +33,7 @@ internal fun OverviewScreen(
         is OverviewViewModel.UiState.Loading -> {
             Loading()
         }
+
         is OverviewViewModel.UiState.Content -> {
             RecipeList(uiState, onNavigateToRecipeDetail)
         }
