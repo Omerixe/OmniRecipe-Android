@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.shared.ui
+package ch.omerixe.ui
 
 sealed class RecipeImage {
     data class External(val url: String) : RecipeImage()

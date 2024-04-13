@@ -1,6 +1,6 @@
-package ch.omerixe.omnirecipe.overview.ui
+package ch.omerixe.overview.ui
 
-import ch.omerixe.omnirecipe.shared.ui.RecipeImage
+import ch.omerixe.ui.RecipeImage
 
 data class RecipeOverview(
     val id: String,

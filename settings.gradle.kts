@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "OmniRecipe"
 include(":app")
+include(":feature:overview")
+include(":core:ui")
+include(":feature:recipedetail")

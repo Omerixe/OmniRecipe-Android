@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.overview.ui
+package ch.omerixe.overview.ui
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

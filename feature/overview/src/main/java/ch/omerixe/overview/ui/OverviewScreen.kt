@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.overview.ui
+package ch.omerixe.overview.ui
 
 import android.content.res.Configuration
 import android.util.Log
@@ -20,12 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ch.omerixe.omnirecipe.R
-import ch.omerixe.omnirecipe.shared.ui.RecipeImage
-import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
+import ch.omerixe.ui.R
+import ch.omerixe.ui.RecipeImage
 
 @Composable
-fun OverviewScreen(
+internal fun OverviewScreen(
     onNavigateToRecipeDetail: (recipeId: String) -> Unit
 ) {
     val recipes = listOf(
@@ -90,11 +89,9 @@ private fun LazyGridScope.header(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
 @Preview(device = "spec:parent=pixel_5,orientation=landscape")
 @Composable
-fun PreviewOverviewScreen() {
-    OmniRecipeTheme {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            OverviewScreen({})
-        }
+private fun PreviewOverviewScreen() {
+    Surface(color = MaterialTheme.colorScheme.background) {
+        OverviewScreen({})
     }
 }
 

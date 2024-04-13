@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.detail.ui
+package ch.omerixe.recipedetail.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,19 +23,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ch.omerixe.omnirecipe.R
-import ch.omerixe.omnirecipe.shared.ui.RecipeImage
-import ch.omerixe.omnirecipe.shared.ui.imageModel
-import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
+import ch.omerixe.ui.RecipeImage
+import ch.omerixe.ui.R
+import ch.omerixe.ui.imageModel
 import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecipeDetailScreen(onNavigateUp: () -> Unit) {
+internal fun RecipeDetailScreen(onNavigateUp: () -> Unit) {
     val recipeDetail = RecipeDetail(
         "Banana Smoothie",
         "A delicious and refreshing smoothie",
-        RecipeImage.Internal(R.drawable.banana),
+        ch.omerixe.ui.RecipeImage.Internal(R.drawable.banana),
         listOf(
             Ingredient("Bananas", "2", "pcs"),
             Ingredient("Honey", "1", "tbsp"),
@@ -137,8 +136,6 @@ fun RecipeDetailScreen(onNavigateUp: () -> Unit) {
 
 @Preview
 @Composable
-fun RecipeDetailScreenPreview() {
-    OmniRecipeTheme {
+private fun RecipeDetailScreenPreview() {
         RecipeDetailScreen({})
-    }
 }

@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.detail.ui
+package ch.omerixe.recipedetail.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
@@ -16,7 +16,7 @@ internal class RecipeArgs(val recipeId: String) {
 fun NavGraphBuilder.recipeDetailScreen(
     onNavigateUp: () -> Unit
 ) {
-    composable("recipe/{$recipeIdArg}") { _ ->
+    composable("recipe/{${ch.omerixe.recipedetail.ui.recipeIdArg}}") { _ ->
         // Here comes the viewmodel implementation, it can read the recipeid from the savedStateHandle
         RecipeDetailScreen(onNavigateUp = onNavigateUp)
     }

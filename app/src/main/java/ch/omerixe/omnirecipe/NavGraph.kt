@@ -5,16 +5,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import ch.omerixe.omnirecipe.detail.ui.navigateToRecipe
-import ch.omerixe.omnirecipe.detail.ui.recipeDetailScreen
-import ch.omerixe.omnirecipe.overview.ui.OverviewRoute
-import ch.omerixe.omnirecipe.overview.ui.overviewScreen
+import ch.omerixe.overview.ui.overviewScreen
+import ch.omerixe.recipedetail.ui.navigateToRecipe
+import ch.omerixe.recipedetail.ui.recipeDetailScreen
 
 @Composable
 fun NavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = OverviewRoute
+    startDestination: String = ch.omerixe.overview.ui.OverviewRoute
 ) {
 
     NavHost(

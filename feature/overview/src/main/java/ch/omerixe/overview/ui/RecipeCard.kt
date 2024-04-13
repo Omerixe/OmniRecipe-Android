@@ -1,4 +1,4 @@
-package ch.omerixe.omnirecipe.overview.ui
+package ch.omerixe.overview.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,15 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ch.omerixe.omnirecipe.R
-import ch.omerixe.omnirecipe.shared.ui.RecipeImage
-import ch.omerixe.omnirecipe.shared.ui.imageModel
-import ch.omerixe.omnirecipe.shared.ui.theme.OmniRecipeTheme
+import ch.omerixe.ui.R
+import ch.omerixe.ui.RecipeImage
+import ch.omerixe.ui.imageModel
 import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecipeCard(
+internal fun RecipeCard(
     recipeOverview: RecipeOverview,
     modifier: Modifier = Modifier,
     action: (String) -> Unit = {}
@@ -64,19 +63,17 @@ fun RecipeCard(
 @Preview
 @Composable
 fun PreviewRecipeCard() {
-    OmniRecipeTheme {
-        RecipeCard(
-            recipeOverview = RecipeOverview(
-                "1",
-                "Test Recipe 1",
-                RecipeImage.Internal(R.drawable.banana)
-            ),
-            modifier = Modifier.padding(
-                start = 16.dp,
-                top = 0.dp,
-                end = 16.dp,
-                bottom = 16.dp
-            )
+    RecipeCard(
+        recipeOverview = RecipeOverview(
+            "1",
+            "Test Recipe 1",
+            RecipeImage.Internal(R.drawable.banana)
+        ),
+        modifier = Modifier.padding(
+            start = 16.dp,
+            top = 0.dp,
+            end = 16.dp,
+            bottom = 16.dp
         )
-    }
+    )
 }

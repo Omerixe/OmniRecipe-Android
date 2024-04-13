@@ -40,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = libs.versions.composeVersion.get()
     }
     packaging {
         resources {
@@ -50,6 +50,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:overview"))
+    implementation(project(":feature:recipedetail"))
+    implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
