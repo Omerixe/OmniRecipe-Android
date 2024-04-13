@@ -1,5 +1,7 @@
 package ch.omerixe.recipedetail.ui
 
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -16,9 +18,13 @@ internal class RecipeArgs(val recipeId: String) {
 fun NavGraphBuilder.recipeDetailScreen(
     onNavigateUp: () -> Unit
 ) {
-    composable("recipe/{${ch.omerixe.recipedetail.ui.recipeIdArg}}") { _ ->
-        // Here comes the viewmodel implementation, it can read the recipeid from the savedStateHandle
-        RecipeDetailScreen(onNavigateUp = onNavigateUp)
+    composable("recipe/{$recipeIdArg}") { _ ->
+        val viewModel: RecipeDetailViewModel = hiltViewModel()
+        val uiState = viewModel.uiState.collectAsState()
+        RecipeDetailScreen(
+            uiState = uiState.value,
+            onNavigateUp = onNavigateUp
+        )
     }
 }
 

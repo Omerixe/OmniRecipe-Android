@@ -30,25 +30,10 @@ import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun RecipeDetailScreen(onNavigateUp: () -> Unit) {
-    val recipeDetail = RecipeDetail(
-        "Banana Smoothie",
-        "A delicious and refreshing smoothie",
-        ch.omerixe.ui.RecipeImage.Internal(R.drawable.banana),
-        listOf(
-            Ingredient("Bananas", "2", "pcs"),
-            Ingredient("Honey", "1", "tbsp"),
-            Ingredient("Milk", "1", "cup"),
-            Ingredient("Ice", "1", "cup"),
-        ),
-        listOf(
-            "Peel the bananas",
-            "Add the bananas to the blender",
-            "Add the honey, milk, and ice to the blender",
-            "Blend until smooth",
-        ),
-    )
-
+internal fun RecipeDetailScreen(
+    uiState: RecipeDetailViewModel.UiState,
+    onNavigateUp: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -64,78 +49,102 @@ internal fun RecipeDetailScreen(onNavigateUp: () -> Unit) {
             )
         }
     ) { padding ->
-        Column(modifier = Modifier.padding(padding)) {
-            AsyncImage(
-                model = recipeDetail.recipeImage.imageModel(),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(id = R.drawable.banana),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            )
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = recipeDetail.title,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                Text(
-                    text = recipeDetail.subtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(R.string.detail_ingredients_heading),
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                Row {
-                    Column {
-                        recipeDetail.ingredients.forEach { ingredient ->
-                            Text(
-                                text = ingredient.quantity,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Column {
-                        recipeDetail.ingredients.forEach { ingredient ->
-                            Text(
-                                text = ingredient.unit,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    Column {
-                        recipeDetail.ingredients.forEach { ingredient ->
-                            Text(
-                                text = ingredient.name,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(R.string.detail_steps_heading),
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                recipeDetail.steps.forEachIndexed { index, step ->
-                    Text(
-                        text = "${index + 1}. $step",
-                        style = MaterialTheme.typography.bodyMedium,
+        when (uiState) {
+            is RecipeDetailViewModel.UiState.Content -> {
+                val recipeDetail = uiState.recipeDetail
+                Column(modifier = Modifier.padding(padding)) {
+                    AsyncImage(
+                        model = recipeDetail.recipeImage.imageModel(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        placeholder = painterResource(id = R.drawable.banana),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
                     )
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = recipeDetail.title,
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                        Text(
+                            text = recipeDetail.subtitle,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.detail_ingredients_heading),
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                        Row {
+                            Column {
+                                recipeDetail.ingredients.forEach { ingredient ->
+                                    Text(
+                                        text = ingredient.quantity,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                recipeDetail.ingredients.forEach { ingredient ->
+                                    Text(
+                                        text = ingredient.unit,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Column {
+                                recipeDetail.ingredients.forEach { ingredient ->
+                                    Text(
+                                        text = ingredient.name,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                }
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.detail_steps_heading),
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                        recipeDetail.steps.forEachIndexed { index, step ->
+                            Text(
+                                text = "${index + 1}. $step",
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                        }
+                    }
                 }
             }
         }
-
     }
 }
 
 @Preview
 @Composable
 private fun RecipeDetailScreenPreview() {
-        RecipeDetailScreen({})
+    RecipeDetailScreen(
+        uiState = RecipeDetailViewModel.UiState.Content(
+            recipeDetail = RecipeDetail(
+                title = "Banana Smoothie",
+                subtitle = "A delicious and refreshing smoothie",
+                recipeImage = RecipeImage.Internal(R.drawable.banana),
+                ingredients = listOf(
+                    Ingredient("Bananas", "2", "pcs"),
+                    Ingredient("Honey", "1", "tbsp"),
+                    Ingredient("Milk", "1", "cup"),
+                    Ingredient("Ice", "1", "cup"),
+                ),
+                steps = listOf(
+                    "Peel the bananas",
+                    "Add the bananas to the blender",
+                    "Add the honey, milk, and ice to the blender",
+                    "Blend until smooth",
+                ),
+            )
+        )
+    ) {}
 }
