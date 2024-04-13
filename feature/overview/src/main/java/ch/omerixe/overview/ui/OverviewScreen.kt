@@ -25,54 +25,31 @@ import ch.omerixe.ui.RecipeImage
 
 @Composable
 internal fun OverviewScreen(
+    uiState: OverviewViewModel.UiState,
     onNavigateToRecipeDetail: (recipeId: String) -> Unit
 ) {
-    val recipes = listOf(
-        RecipeOverview(
-            "1",
-            "Test Recipe 1",
-            RecipeImage.Internal(R.drawable.banana)
-        ),
-        RecipeOverview(
-            "2",
-            "Test Recipe 2",
-            RecipeImage.Internal(R.drawable.banana)
-        ),
-        RecipeOverview(
-            "3",
-            "Test Recipe 3",
-            RecipeImage.Internal(R.drawable.banana)
-        ),
-        RecipeOverview(
-            "4",
-            "Test Recipe 4",
-            RecipeImage.Internal(R.drawable.banana)
-        ),
-        RecipeOverview(
-            "5",
-            "Test Recipe 5",
-            RecipeImage.Internal(R.drawable.banana)
-        ),
-    )
-
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 120.dp),
-        contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        header {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-        items(recipes) { recipe ->
-            RecipeCard(recipeOverview = recipe) { recipeId ->
-                Log.d("OverviewScreen", "Recipe clicked: $recipeId")
-                onNavigateToRecipeDetail(recipeId)
+    when (uiState) {
+        is OverviewViewModel.UiState.Content -> {
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 120.dp),
+                contentPadding = PaddingValues(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                header {
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+                items(uiState.recipes) { recipe ->
+                    RecipeCard(recipeOverview = recipe) { recipeId ->
+                        Log.d("OverviewScreen", "Recipe clicked: $recipeId")
+                        onNavigateToRecipeDetail(recipeId)
+                    }
+                }
             }
         }
     }
@@ -91,7 +68,22 @@ private fun LazyGridScope.header(
 @Composable
 private fun PreviewOverviewScreen() {
     Surface(color = MaterialTheme.colorScheme.background) {
-        OverviewScreen({})
+        OverviewScreen(
+            OverviewViewModel.UiState.Content(
+                recipes = listOf(
+                    RecipeOverview(
+                        "1",
+                        "Test Recipe 1",
+                        RecipeImage.Internal(R.drawable.banana)
+                    ),
+                    RecipeOverview(
+                        "2",
+                        "Test Recipe 2",
+                        RecipeImage.Internal(R.drawable.banana)
+                    ),
+                )
+            )
+        ) {}
     }
 }
 
