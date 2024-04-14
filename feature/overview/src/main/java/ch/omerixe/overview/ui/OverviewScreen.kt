@@ -2,9 +2,12 @@ package ch.omerixe.overview.ui
 
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -16,8 +19,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ch.omerixe.ui.Loading
@@ -26,8 +32,7 @@ import ch.omerixe.ui.RecipeImage
 
 @Composable
 internal fun OverviewScreen(
-    uiState: OverviewViewModel.UiState,
-    onNavigateToRecipeDetail: (recipeId: String) -> Unit
+    uiState: OverviewViewModel.UiState, onNavigateToRecipeDetail: (recipeId: String) -> Unit
 ) {
     when (uiState) {
         is OverviewViewModel.UiState.Loading -> {
@@ -42,22 +47,29 @@ internal fun OverviewScreen(
 
 @Composable
 private fun RecipeList(
-    uiState: OverviewViewModel.UiState.Content,
-    onNavigateToRecipeDetail: (recipeId: String) -> Unit
+    uiState: OverviewViewModel.UiState.Content, onNavigateToRecipeDetail: (recipeId: String) -> Unit
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 120.dp),
-        contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        columns = GridCells.Adaptive(minSize = 150.dp),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
         header {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(16.dp)
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    painter = painterResource(id = R.drawable.app_icon),
+                    contentDescription = null,
+                    modifier = Modifier.height(50.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    style = MaterialTheme.typography.headlineLarge,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
         }
         items(uiState.recipes) { recipe ->
             RecipeCard(recipeOverview = recipe) { recipeId ->
@@ -84,14 +96,10 @@ private fun PreviewOverviewScreen() {
             OverviewViewModel.UiState.Content(
                 recipes = listOf(
                     RecipeOverview(
-                        "1",
-                        "Test Recipe 1",
-                        RecipeImage.Internal(R.drawable.banana)
+                        "1", "Test Recipe 1", RecipeImage.Internal(R.drawable.banana)
                     ),
                     RecipeOverview(
-                        "2",
-                        "Test Recipe 2",
-                        RecipeImage.Internal(R.drawable.banana)
+                        "2", "This is a very good recipe", RecipeImage.Internal(R.drawable.banana)
                     ),
                 )
             )

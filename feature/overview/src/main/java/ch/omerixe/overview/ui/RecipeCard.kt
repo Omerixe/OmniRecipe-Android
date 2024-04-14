@@ -1,7 +1,6 @@
 package ch.omerixe.overview.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -45,17 +44,17 @@ internal fun RecipeCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp),
+                    .height(120.dp),
                 placeholder = painterResource(id = R.drawable.banana),
             )
             Text(
                 text = recipeOverview.title,
                 maxLines = 2,
+                minLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
             )
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
