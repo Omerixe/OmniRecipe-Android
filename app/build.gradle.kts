@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":feature:overview"))
     implementation(project(":feature:recipedetail"))
     implementation(project(":core:ui"))
+    //Todo: Can this be better solved? App just has access to it for Hilt
+    implementation(project(":core:data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
