@@ -57,14 +57,14 @@ internal fun RecipeDetailScreen(
             }
 
             is RecipeDetailViewModel.UiState.Content -> {
-                RecipeDetail(uiState, padding)
+                RecipeComponent(uiState, padding)
             }
         }
     }
 }
 
 @Composable
-private fun RecipeDetail(
+private fun RecipeComponent(
     uiState: RecipeDetailViewModel.UiState.Content,
     padding: PaddingValues
 ) {
