@@ -1,6 +1,6 @@
 # OmniRecipe
 
-**IPORTANT**: This project is currently in development and not yet ready for use.
+**IMPORTANT**: This project is currently in development and not yet ready for use.
 
 OmniRecipe is a recipe app that is currently still quite simple and allows to browse through
 recipes.
