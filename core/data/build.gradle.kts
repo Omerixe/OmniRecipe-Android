@@ -9,6 +9,12 @@ plugins {
     kotlin("kapt")
 }
 
+// Change this property if you want to switch to the real server implementation
+val useMockServer = true
+
+// Make sure your secrets.properties file is in the root project directory and contains the following key/value pairs:
+// API_KEY=yourApiKey
+// API_URL=https://yourApiUrl.com
 val apikeyPropertiesFile = rootProject.file("secrets.properties")
 val apikeyProperties = Properties()
 apikeyProperties.load(FileInputStream(apikeyPropertiesFile))
@@ -32,6 +38,11 @@ android {
             "String",
             "API_URL",
             apikeyProperties.getProperty("API_URL", "https://www.example.com")
+        )
+        buildConfigField(
+            "Boolean",
+            "USE_MOCK",
+            useMockServer.toString()
         )
     }
 
