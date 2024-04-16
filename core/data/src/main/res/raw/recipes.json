@@ -1,0 +1,179 @@
+[
+  {
+    "id": "1",
+    "title": "Banana bread",
+    "subtitle": "A delicious banana bread recipe",
+    "ingredients": [
+      {
+        "name": "bananas",
+        "quantity": "3",
+        "unit": "pieces"
+      },
+      {
+        "name": "flour",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "sugar",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "butter",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "baking powder",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "baking soda",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "egg",
+        "quantity": "1",
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "Preheat the oven to 350°F.",
+      "Mash the bananas in a bowl.",
+      "Add the sugar, butter, and egg to the bowl and mix well.",
+      "In a separate bowl, mix the flour, baking powder, baking soda, and salt.",
+      "Add the dry ingredients to the wet ingredients and mix until combined.",
+      "Pour the batter into a greased loaf pan.",
+      "Bake for 50-60 minutes, or until a toothpick inserted into the center comes out clean.",
+      "Let the bread cool before slicing and serving."
+    ],
+    "version": "1",
+    "imageUrl": "banana_bread"
+  },
+  {
+    "id": "2",
+    "title": "Chocolate chip cookies",
+    "subtitle": "A classic chocolate chip cookie recipe",
+    "ingredients": [
+      {
+        "name": "flour",
+        "quantity": "2",
+        "unit": "cups"
+      },
+      {
+        "name": "butter",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "sugar",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "brown sugar",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "eggs",
+        "quantity": "2",
+        "unit": "pieces"
+      },
+      {
+        "name": "vanilla extract",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "baking soda",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "chocolate chips",
+        "quantity": "2",
+        "unit": "cups"
+      }
+    ],
+    "steps": [
+      "Preheat the oven to 375°F.",
+      "Cream the butter, sugar, and brown sugar together in a bowl.",
+      "Add the eggs and vanilla extract to the bowl and mix well.",
+      "In a separate bowl, mix the flour, baking soda, and salt.",
+      "Add the dry ingredients to the wet ingredients and mix until combined.",
+      "Stir in the chocolate chips.",
+      "Drop spoonfuls of dough onto a greased baking sheet.",
+      "Bake for 8-10 minutes, or until the edges are golden brown.",
+      "Let the cookies cool on the baking sheet for a few minutes before transferring to a wire rack to cool completely."
+    ],
+    "version": "1",
+    "imageUrl": "chocolate_chip_cookies"
+  },
+  {
+    "id": "3",
+    "title": "Pancakes",
+    "subtitle": "A simple pancake recipe",
+    "ingredients": [
+      {
+        "name": "flour",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "sugar",
+        "quantity": "2",
+        "unit": "tbsp"
+      },
+      {
+        "name": "baking powder",
+        "quantity": "2",
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "quantity": "1",
+        "unit": "tsp"
+      },
+      {
+        "name": "milk",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "name": "egg",
+        "quantity": "1",
+        "unit": "piece"
+      },
+      {
+        "name": "butter",
+        "quantity": "2",
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "In a bowl, mix the flour, sugar, baking powder, and salt.",
+      "In a separate bowl, mix the milk, egg, and melted butter.",
+      "Add the wet ingredients to the dry ingredients and mix until combined.",
+      "Heat a greased skillet over medium heat.",
+      "Pour 1/4 cup of batter onto the skillet for each pancake.",
+      "Cook until bubbles form on the surface of the pancake, then flip and cook for another minute.",
+      "Serve the pancakes warm with your favorite toppings."
+    ],
+    "version": "1",
+    "imageUrl": "pancakes"
+  }
+]
