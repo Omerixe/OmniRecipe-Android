@@ -8,11 +8,10 @@ Adding and editing recipes will follow in the future as well as more features.
 
 The app is built with modern Android technologies like Jetpack Compose, Hilt and it is modularized.
 
-The backend for this version of the app is implemented in a different
+The app uses a mock backend by default but can be connected to a network backend.
+
+The api/backend for this version of the app is implemented in a different
 repository: [OmniRecipe-Backend](https://github.com/Omerixe/OmniRecipe-Backend).
-It is currently built to only connect to an API defined in the repository. All details like URLs and
-API keys are stored in a
-`secrets.properties` file which is not committed to the repository as I don't want to share my data.
 
 ## Features
 
@@ -46,6 +45,14 @@ I will soon provide a way to run the app without the need to set up the backend 
 mock backend.
 
 1. Clone the repository
+2. Build and run the app
+3. Enjoy browsing through recipes
+
+If you want to run the app with the real server, you need to set up the backend as well.
+Before you run the app, you need to set it up to use the real server.
+
+1. In the `build.gradle.kts` file of the `app` module, change the `useMockBackend` variable
+   to `false`.
 2. Create a `secrets.properties` file in the root directory of the project
 3. Add the following properties to the file:
 
@@ -53,9 +60,6 @@ mock backend.
 API_URL="your_api_url"
 API_KEY="your_api_key"
 ```
-
-4. Build and run the app
-5. Enjoy browsing through recipes
 
 ## License
 
