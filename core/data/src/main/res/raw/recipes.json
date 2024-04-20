@@ -6,43 +6,43 @@
     "ingredients": [
       {
         "name": "bananas",
-        "quantity": "3",
+        "quantity": 3,
         "unit": "pieces"
       },
       {
-        "name": "flour",
-        "quantity": "1",
-        "unit": "cup"
-      },
-      {
         "name": "sugar",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "cup"
       },
       {
         "name": "butter",
-        "quantity": "1",
+        "quantity": 0.5,
         "unit": "cup"
       },
       {
+        "name": "egg",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "flour",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
         "name": "baking powder",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "tsp"
       },
       {
         "name": "baking soda",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "tsp"
       },
       {
         "name": "salt",
-        "quantity": "1",
+        "quantity": 0.5,
         "unit": "tsp"
-      },
-      {
-        "name": "egg",
-        "quantity": "1",
-        "unit": "piece"
       }
     ],
     "steps": [
@@ -55,7 +55,7 @@
       "Bake for 50-60 minutes, or until a toothpick inserted into the center comes out clean.",
       "Let the bread cool before slicing and serving."
     ],
-    "version": "1",
+    "version": 1,
     "imageUrl": "banana_bread"
   },
   {
@@ -64,48 +64,48 @@
     "subtitle": "A classic chocolate chip cookie recipe",
     "ingredients": [
       {
-        "name": "flour",
-        "quantity": "2",
-        "unit": "cups"
-      },
-      {
         "name": "butter",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "cup"
       },
       {
         "name": "sugar",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "cup"
       },
       {
         "name": "brown sugar",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "cup"
       },
       {
         "name": "eggs",
-        "quantity": "2",
+        "quantity": 2,
         "unit": "pieces"
       },
       {
         "name": "vanilla extract",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "tsp"
       },
       {
+        "name": "flour",
+        "quantity": 3,
+        "unit": "cups"
+      },
+      {
         "name": "baking soda",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "tsp"
       },
       {
         "name": "salt",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "tsp"
       },
       {
         "name": "chocolate chips",
-        "quantity": "2",
+        "quantity": 2,
         "unit": "cups"
       }
     ],
@@ -120,7 +120,7 @@
       "Bake for 8-10 minutes, or until the edges are golden brown.",
       "Let the cookies cool on the baking sheet for a few minutes before transferring to a wire rack to cool completely."
     ],
-    "version": "1",
+    "version": 1,
     "imageUrl": "chocolate_chip_cookies"
   },
   {
@@ -130,37 +130,37 @@
     "ingredients": [
       {
         "name": "flour",
-        "quantity": "1",
-        "unit": "cup"
+        "quantity": 1.5,
+        "unit": "cups"
       },
       {
         "name": "sugar",
-        "quantity": "2",
+        "quantity": 2,
         "unit": "tbsp"
       },
       {
         "name": "baking powder",
-        "quantity": "2",
-        "unit": "tsp"
+        "quantity": 1,
+        "unit": "tbsp"
       },
       {
         "name": "salt",
-        "quantity": "1",
+        "quantity": 0.5,
         "unit": "tsp"
       },
       {
         "name": "milk",
-        "quantity": "1",
-        "unit": "cup"
+        "quantity": 1.25,
+        "unit": "cups"
       },
       {
         "name": "egg",
-        "quantity": "1",
+        "quantity": 1,
         "unit": "piece"
       },
       {
         "name": "butter",
-        "quantity": "2",
+        "quantity": 3,
         "unit": "tbsp"
       }
     ],
@@ -173,7 +173,7 @@
       "Cook until bubbles form on the surface of the pancake, then flip and cook for another minute.",
       "Serve the pancakes warm with your favorite toppings."
     ],
-    "version": "1",
+    "version": 1,
     "imageUrl": "pancakes"
   }
 ]

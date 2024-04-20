@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,4 +44,5 @@ private fun Recipe.toUi() = RecipeDetail(
     recipeImage = RecipeImage.External(imageUrl),
 )
 
-private fun ch.omerixe.data.model.Ingredient.toUi() = Ingredient(name, quantity.toString(), unit)
+private fun ch.omerixe.data.model.Ingredient.toUi() =
+    Ingredient(name, DecimalFormat("###.##").format(quantity), unit)
