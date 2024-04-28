@@ -5,8 +5,7 @@ import javax.inject.Inject
 
 class RecipeSummaryRepository @Inject constructor(private val omniRecipeApi: OmniRecipeApi) {
 
-    suspend fun getRecipeSummaries(): List<RecipeSummary> {
-        return omniRecipeApi.getRecipeSummaries()
-    }
+    suspend fun getRecipeSummaries(): Result<List<RecipeSummary>> =
+        runCatching { omniRecipeApi.getRecipeSummaries() }
 
 }

@@ -21,8 +21,15 @@ internal class OverviewViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val recipeSummaries = recipeSummaryRepository.getRecipeSummaries()
-            _uiState.value = UiState.Content(recipeSummaries.map { it.toUi() })
+            recipeSummaryRepository.getRecipeSummaries().fold(
+                onSuccess = { summaries ->
+                    _uiState.value = UiState.Content(summaries.map { it.toUi() })
+                },
+                onFailure = {
+                    // We can do more error handling here
+                    _uiState.value = UiState.Content(emptyList(), UiError.UNSPECIFIED)
+                }
+            )
         }
     }
 
