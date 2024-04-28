@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ch.omerixe.ui.ErrorBox
 import ch.omerixe.ui.Loading
 import ch.omerixe.ui.R
 import ch.omerixe.ui.RecipeImage
@@ -71,12 +72,24 @@ private fun RecipeList(
                 )
             }
         }
+        if (uiState.error != null) {
+            item(span = { GridItemSpan(this.maxLineSpan) }) {
+                ErrorBox(message = uiState.error.message())
+            }
+        }
         items(uiState.recipes) { recipe ->
             RecipeCard(recipeOverview = recipe) { recipeId ->
                 Log.d("OverviewScreen", "Recipe clicked: $recipeId")
                 onNavigateToRecipeDetail(recipeId)
             }
         }
+    }
+}
+
+@Composable
+private fun OverviewViewModel.UiError.message(): String {
+    return when (this) {
+        OverviewViewModel.UiError.UNSPECIFIED -> stringResource(R.string.overview_error_unspecified)
     }
 }
 
@@ -106,6 +119,25 @@ private fun PreviewOverviewScreen() {
         ) {}
     }
 }
+
+
+@Preview
+@Composable
+private fun ErrorPreview() {
+    OverviewScreen(
+        OverviewViewModel.UiState.Content(
+            listOf(
+                RecipeOverview(
+                    "1", "Test Recipe 1", RecipeImage.Internal(R.drawable.banana)
+                ),
+                RecipeOverview(
+                    "2", "This is a very good recipe", RecipeImage.Internal(R.drawable.banana)
+                ),
+            ), OverviewViewModel.UiError.UNSPECIFIED
+        )
+    ) {}
+}
+
 
 @Preview
 @Composable

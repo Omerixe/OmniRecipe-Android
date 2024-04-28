@@ -28,7 +28,12 @@ internal class OverviewViewModel @Inject constructor(
 
     sealed class UiState {
         data object Loading : UiState()
-        data class Content(val recipes: List<RecipeOverview>) : UiState()
+        data class Content(val recipes: List<RecipeOverview>, val error: UiError? = null) :
+            UiState()
+    }
+
+    enum class UiError {
+        UNSPECIFIED
     }
 }
 
