@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ch.omerixe.ui.ErrorBox
 import ch.omerixe.ui.Loading
 import ch.omerixe.ui.R
 import ch.omerixe.ui.RecipeImage
@@ -61,7 +62,19 @@ internal fun RecipeDetailScreen(
             is RecipeDetailViewModel.UiState.Content -> {
                 RecipeComponent(uiState, padding)
             }
+
+            is RecipeDetailViewModel.UiState.Error -> {
+                ErrorBox(message = uiState.type.message(), modifier = Modifier.padding(padding))
+
+            }
         }
+    }
+}
+
+@Composable
+private fun RecipeDetailViewModel.UiError.message(): String {
+    return when (this) {
+        RecipeDetailViewModel.UiError.UNSPECIFIED -> stringResource(R.string.detail_error_unspecified)
     }
 }
 
@@ -166,5 +179,13 @@ private fun RecipeDetailScreenPreview() {
                 ),
             )
         )
+    ) {}
+}
+
+@Preview
+@Composable
+fun RecipeDetailScreenErrorPreview() {
+    RecipeDetailScreen(
+        uiState = RecipeDetailViewModel.UiState.Error(RecipeDetailViewModel.UiError.UNSPECIFIED)
     ) {}
 }

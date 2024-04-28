@@ -10,9 +10,7 @@ class RecipeRepository @Inject constructor(private val omniRecipeApi: OmniRecipe
         return omniRecipeApi.getRecipes()
     }
 
-    suspend fun getRecipe(id: String): Recipe {
-        return omniRecipeApi.getRecipe(id)
-    }
+    suspend fun getRecipe(id: String): Result<Recipe> = runCatching { omniRecipeApi.getRecipe(id) }
 
 }
 

@@ -25,14 +25,27 @@ class RecipeDetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val recipe = recipeRepository.getRecipe(recipeId)
-            _uiState.value = UiState.Content(recipe.toUi())
+            recipeRepository.getRecipe(recipeId).fold(
+                onSuccess = { recipe ->
+                    _uiState.value = UiState.Content(recipe.toUi())
+                },
+                onFailure = {
+                    // We can do more error handling here
+                    _uiState.value = UiState.Error(UiError.UNSPECIFIED)
+                }
+            )
         }
     }
 
     sealed class UiState {
         data object Loading : UiState()
         data class Content(val recipeDetail: RecipeDetail) : UiState()
+
+        data class Error(val type: UiError) : UiState()
+    }
+
+    enum class UiError {
+        UNSPECIFIED
     }
 }
 
