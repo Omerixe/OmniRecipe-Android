@@ -1,5 +1,6 @@
 package ch.omerixe.overview.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,6 +31,11 @@ internal fun RecipeCard(
     modifier: Modifier = Modifier,
     action: (String) -> Unit = {}
 ) {
+    val gradient = Brush.linearGradient(
+        0.6f to MaterialTheme.colorScheme.surfaceVariant,
+        1f to MaterialTheme.colorScheme.background,
+    )
+
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(
@@ -37,14 +44,14 @@ internal fun RecipeCard(
         onClick = { action(recipeOverview.id) },
         modifier = modifier
     ) {
-        Column {
+        Column(modifier = Modifier.background(brush = gradient)) {
             AsyncImage(
                 model = recipeOverview.recipeImage.imageModel(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp),
+                    .height(160.dp),
                 placeholder = painterResource(id = R.drawable.banana),
             )
             Text(
