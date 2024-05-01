@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class OmniRecipeMockApi @Inject constructor(
+internal class OmniRecipeMockApi @Inject constructor(
     @ApplicationContext private val context: Context
 ) : OmniRecipeApi {
     private val recipes: MutableList<Recipe> = mutableListOf()

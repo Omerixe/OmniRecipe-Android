@@ -37,10 +37,10 @@ abstract class ApiBindingModule {
     @Binds
     @IntoMap
     @IntKey(NETWORK)
-    abstract fun bindOmniRecipeKtorApi(omniRecipeKtorApi: OmniRecipeKtorApi): OmniRecipeApi
+    internal abstract fun bindOmniRecipeKtorApi(omniRecipeKtorApi: OmniRecipeKtorApi): OmniRecipeApi
 
     @Binds
     @IntoMap
     @IntKey(MOCK)
-    abstract fun bindOmniRecipeMockApi(omniRecipeMockApi: OmniRecipeMockApi): OmniRecipeApi
+    internal abstract fun bindOmniRecipeMockApi(omniRecipeMockApi: OmniRecipeMockApi): OmniRecipeApi
 }

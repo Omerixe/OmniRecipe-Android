@@ -8,7 +8,8 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import javax.inject.Inject
 
-class OmniRecipeKtorApi @Inject constructor(private val httpClient: HttpClient) : OmniRecipeApi {
+internal class OmniRecipeKtorApi @Inject constructor(private val httpClient: HttpClient) :
+    OmniRecipeApi {
 
     override suspend fun getRecipes(): List<Recipe> {
         return httpClient.get("recipe").body()
