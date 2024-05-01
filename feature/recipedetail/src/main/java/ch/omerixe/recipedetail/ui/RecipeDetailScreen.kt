@@ -1,7 +1,7 @@
 package ch.omerixe.recipedetail.ui
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,17 +11,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,42 +36,59 @@ import ch.omerixe.ui.RecipeImage
 import ch.omerixe.ui.imageModel
 import coil.compose.AsyncImage
 
+private val imageHeight = 250.dp
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecipeDetailScreen(
     uiState: RecipeDetailViewModel.UiState,
     onNavigateUp: () -> Unit
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = {
-                    IconButton(onClick = onNavigateUp) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.navigate_up_description)
-                        )
-                    }
-                }
-            )
-        }
-    ) { padding ->
+    val scrollState = rememberScrollState()
+    val toolbarAlpha = alphaFromScrollState(scrollState)
+    val surfaceColor = MaterialTheme.colorScheme.surface.copy(alpha = toolbarAlpha)
+
+    Scaffold() { padding ->
         when (uiState) {
             is RecipeDetailViewModel.UiState.Loading -> {
                 Loading()
             }
 
             is RecipeDetailViewModel.UiState.Content -> {
-                RecipeComponent(uiState, padding)
+                RecipeComponent(uiState, scrollState)
             }
 
             is RecipeDetailViewModel.UiState.Error -> {
                 ErrorBox(message = uiState.type.message(), modifier = Modifier.padding(padding))
-
             }
         }
+        TopAppBar(
+            title = {},
+            colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = surfaceColor),
+            navigationIcon = {
+                IconButton(
+                    onClick = onNavigateUp,
+                    colors = IconButtonDefaults.iconButtonColors().copy(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                            .copy(alpha = 1 - toolbarAlpha),
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.navigate_up_description)
+                    )
+                }
+            },
+            modifier = Modifier.padding(padding)
+        )
     }
+}
+
+@Composable
+private fun alphaFromScrollState(scrollState: ScrollState): Float {
+    val percentage = scrollState.value / LocalDensity.current.run { imageHeight.toPx() }
+    return if (percentage < 1) percentage else 1f
 }
 
 @Composable
@@ -81,13 +101,12 @@ private fun RecipeDetailViewModel.UiError.message(): String {
 @Composable
 private fun RecipeComponent(
     uiState: RecipeDetailViewModel.UiState.Content,
-    padding: PaddingValues
+    scrollState: ScrollState
 ) {
     val recipeDetail = uiState.recipeDetail
     Column(
         modifier = Modifier
-            .padding(padding)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
         AsyncImage(
             model = recipeDetail.recipeImage.imageModel(),
@@ -96,7 +115,7 @@ private fun RecipeComponent(
             placeholder = painterResource(id = R.drawable.banana),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(imageHeight)
         )
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
