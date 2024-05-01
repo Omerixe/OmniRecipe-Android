@@ -26,7 +26,11 @@ fun ErrorBox(message: String, modifier: Modifier = Modifier) {
             .background(MaterialTheme.colorScheme.errorContainer)
             .padding(16.dp)
     ) {
-        Icon(imageVector = Icons.Outlined.Warning, contentDescription = null)
+        Icon(
+            imageVector = Icons.Outlined.Warning,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onErrorContainer
+        )
         Spacer(modifier = Modifier.width(8.dp))
         Text(message)
     }
