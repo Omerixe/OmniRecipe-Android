@@ -1,5 +1,6 @@
 package ch.omerixe.recipedetail.ui
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import javax.inject.Inject
+
+private const val TAG = "RecipeDetailViewModel"
 
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
@@ -31,6 +34,7 @@ class RecipeDetailViewModel @Inject constructor(
                 },
                 onFailure = {
                     // We can do more error handling here
+                    Log.d(TAG, "Error fetching recipe", it)
                     _uiState.value = UiState.Error(UiError.UNSPECIFIED)
                 }
             )

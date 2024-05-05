@@ -1,5 +1,6 @@
 package ch.omerixe.overview.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.omerixe.data.domain.RecipeSummaryRepository
@@ -10,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+private const val TAG = "OverviewViewModel"
 
 @HiltViewModel
 internal class OverviewViewModel @Inject constructor(
@@ -27,6 +30,7 @@ internal class OverviewViewModel @Inject constructor(
                 },
                 onFailure = {
                     // We can do more error handling here
+                    Log.d(TAG, "Error fetching recipes", it)
                     _uiState.value = UiState.Content(emptyList(), UiError.UNSPECIFIED)
                 }
             )
