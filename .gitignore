@@ -35,4 +35,4 @@ google-services.json
 *.hprof
 
 # Configuration values
-secrets.properties
+secrets*.properties
