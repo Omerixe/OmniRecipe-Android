@@ -1,5 +1,6 @@
 package ch.omerixe.data.domain
 
+import android.util.Log
 import ch.omerixe.data.database.OmniDatabase
 import ch.omerixe.data.database.di.IoDispatcher
 import ch.omerixe.data.database.model.RecipeEntity
@@ -10,6 +11,8 @@ import ch.omerixe.data.network.model.NetworkRecipeSummary
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
+private const val TAG = "RecipeSummaryRepository"
 
 class RecipeSummaryRepository @Inject constructor(
     private val omniRecipeApi: OmniRecipeApi,
@@ -24,6 +27,7 @@ class RecipeSummaryRepository @Inject constructor(
                     Result.success(it.map(NetworkRecipeSummary::toExternalRecipeSummary))
                 },
                 onFailure = {
+                    Log.d(TAG, "Fallback to offline data", it)
                     val offlineRecipes = omniDatabase.recipeDao().getAll()
                     if (offlineRecipes.isNotEmpty()) {
                         Result.success(offlineRecipes.map(RecipeEntity::toExternalRecipeSummary))

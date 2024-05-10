@@ -1,5 +1,6 @@
 package ch.omerixe.data.domain
 
+import android.util.Log
 import ch.omerixe.data.database.OmniDatabase
 import ch.omerixe.data.database.di.IoDispatcher
 import ch.omerixe.data.model.external.Recipe
@@ -11,6 +12,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private const val TAG = "RecipeRepository"
 
 class RecipeRepository @Inject constructor(
     private val omniRecipeApi: OmniRecipeApi,
@@ -32,6 +34,7 @@ class RecipeRepository @Inject constructor(
                     Result.success(it)
                 },
                 onFailure = { throwable ->
+                    Log.d(TAG, "Fallback to offline data", throwable)
                     val offlineRecipe = omniDatabase.recipeDao().findById(id)
                     offlineRecipe?.let { Result.success(it.toExternalRecipe()) } ?: Result.failure(
                         throwable
