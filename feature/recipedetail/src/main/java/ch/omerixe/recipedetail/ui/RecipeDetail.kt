@@ -7,11 +7,11 @@ data class RecipeDetail(
     val title: String,
     val subtitle: String,
     val recipeImage: RecipeImage,
-    val ingredients: List<Ingredient>,
+    val ingredients: List<UiIngredient>,
     val steps: List<String>,
 )
 
-data class Ingredient(
+data class UiIngredient(
     val name: String,
     val quantity: String,
     val unit: String,

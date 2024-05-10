@@ -185,10 +185,10 @@ private fun RecipeDetailScreenPreview() {
                 subtitle = "A delicious and refreshing smoothie",
                 recipeImage = RecipeImage.Internal(R.drawable.banana),
                 ingredients = listOf(
-                    Ingredient("Bananas", "2", "pcs"),
-                    Ingredient("Honey", "1", "tbsp"),
-                    Ingredient("Milk", "1", "cup"),
-                    Ingredient("Ice", "1", "cup"),
+                    UiIngredient("Bananas", "2", "pcs"),
+                    UiIngredient("Honey", "1", "tbsp"),
+                    UiIngredient("Milk", "1", "cup"),
+                    UiIngredient("Ice", "1", "cup"),
                 ),
                 steps = listOf(
                     "Peel the bananas",
