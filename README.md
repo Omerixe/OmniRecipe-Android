@@ -29,6 +29,7 @@ repository: [OmniRecipe-Backend](https://github.com/Omerixe/OmniRecipe-Backend).
 - [Jetpack Compose](https://developer.android.com/jetpack/compose)
 - [Hilt](https://dagger.dev/hilt/)
 - [Ktor](https://ktor.io/)
+- [Room](https://developer.android.com/jetpack/androidx/releases/room)
 - [Modularization](https://developer.android.com/topic/modularization)
 
 ## Architecture
@@ -37,7 +38,8 @@ The app is built with clean architecture in mind but does not follow it to every
 Although the app is still small, I have opted for modularization to get a feeling for the overhead
 it can create but also to see if the advantages make it worth.
 It is modularized in a way which is based on the approach
-in [NowInAndroid](https://github.com/android/nowinandroid/tree/main).
+in [NowInAndroid](https://github.com/android/nowinandroid/tree/main). Room is used to store data for
+offline usage, but the app is not built "offline-first".
 
 ## Setup
 
