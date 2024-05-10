@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
     alias(libs.plugins.hiltAndroid)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 // Change this property if you want to switch to the real server implementation
@@ -73,8 +73,11 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.compose)
+    ksp(libs.hilt.android.compiler)
 
-    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
