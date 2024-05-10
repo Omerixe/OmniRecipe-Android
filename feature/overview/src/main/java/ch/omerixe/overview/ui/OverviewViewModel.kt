@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.omerixe.data.domain.RecipeSummaryRepository
-import ch.omerixe.data.model.network.NetworkRecipeSummary
+import ch.omerixe.data.network.model.NetworkRecipeSummary
 import ch.omerixe.ui.RecipeImage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

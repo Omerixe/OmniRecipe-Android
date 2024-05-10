@@ -1,8 +1,8 @@
-package ch.omerixe.data.domain.ktor
+package ch.omerixe.data.network.ktor
 
-import ch.omerixe.data.domain.OmniRecipeApi
-import ch.omerixe.data.model.network.NetworkRecipe
-import ch.omerixe.data.model.network.NetworkRecipeSummary
+import ch.omerixe.data.network.OmniRecipeApi
+import ch.omerixe.data.network.model.NetworkRecipe
+import ch.omerixe.data.network.model.NetworkRecipeSummary
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

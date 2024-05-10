@@ -1,6 +1,7 @@
 package ch.omerixe.data.domain
 
-import ch.omerixe.data.model.network.NetworkRecipe
+import ch.omerixe.data.network.OmniRecipeApi
+import ch.omerixe.data.network.model.NetworkRecipe
 import javax.inject.Inject
 
 

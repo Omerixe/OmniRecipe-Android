@@ -1,4 +1,4 @@
-package ch.omerixe.data.model.network
+package ch.omerixe.data.network.model
 
 import kotlinx.serialization.Serializable
 

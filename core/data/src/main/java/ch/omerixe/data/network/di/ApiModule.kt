@@ -1,9 +1,9 @@
-package ch.omerixe.data.di
+package ch.omerixe.data.network.di
 
 import ch.omerixe.data.BuildConfig
-import ch.omerixe.data.domain.OmniRecipeApi
-import ch.omerixe.data.domain.ktor.OmniRecipeKtorApi
-import ch.omerixe.data.domain.mock.OmniRecipeMockApi
+import ch.omerixe.data.network.OmniRecipeApi
+import ch.omerixe.data.network.ktor.OmniRecipeKtorApi
+import ch.omerixe.data.network.mock.OmniRecipeMockApi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

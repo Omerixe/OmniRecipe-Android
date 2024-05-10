@@ -1,7 +1,7 @@
-package ch.omerixe.data.domain
+package ch.omerixe.data.network
 
-import ch.omerixe.data.model.network.NetworkRecipe
-import ch.omerixe.data.model.network.NetworkRecipeSummary
+import ch.omerixe.data.network.model.NetworkRecipe
+import ch.omerixe.data.network.model.NetworkRecipeSummary
 
 interface OmniRecipeApi {
 

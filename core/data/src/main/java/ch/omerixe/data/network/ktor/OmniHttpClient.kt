@@ -1,4 +1,4 @@
-package ch.omerixe.data.domain.ktor
+package ch.omerixe.data.network.ktor
 
 import ch.omerixe.data.BuildConfig
 import io.ktor.client.HttpClient

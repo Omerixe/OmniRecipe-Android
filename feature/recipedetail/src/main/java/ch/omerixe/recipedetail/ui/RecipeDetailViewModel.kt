@@ -5,8 +5,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.omerixe.data.domain.RecipeRepository
-import ch.omerixe.data.model.network.NetworkIngredient
-import ch.omerixe.data.model.network.NetworkRecipe
+import ch.omerixe.data.network.model.NetworkIngredient
+import ch.omerixe.data.network.model.NetworkRecipe
 import ch.omerixe.ui.RecipeImage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

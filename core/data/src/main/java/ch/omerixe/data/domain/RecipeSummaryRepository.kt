@@ -1,6 +1,7 @@
 package ch.omerixe.data.domain
 
-import ch.omerixe.data.model.network.NetworkRecipeSummary
+import ch.omerixe.data.network.OmniRecipeApi
+import ch.omerixe.data.network.model.NetworkRecipeSummary
 import javax.inject.Inject
 
 class RecipeSummaryRepository @Inject constructor(private val omniRecipeApi: OmniRecipeApi) {

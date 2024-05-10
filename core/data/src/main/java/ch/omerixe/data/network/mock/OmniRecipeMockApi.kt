@@ -1,10 +1,10 @@
-package ch.omerixe.data.domain.mock
+package ch.omerixe.data.network.mock
 
 import android.content.Context
 import ch.omerixe.data.R
-import ch.omerixe.data.domain.OmniRecipeApi
-import ch.omerixe.data.model.network.NetworkRecipe
-import ch.omerixe.data.model.network.NetworkRecipeSummary
+import ch.omerixe.data.network.OmniRecipeApi
+import ch.omerixe.data.network.model.NetworkRecipe
+import ch.omerixe.data.network.model.NetworkRecipeSummary
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json

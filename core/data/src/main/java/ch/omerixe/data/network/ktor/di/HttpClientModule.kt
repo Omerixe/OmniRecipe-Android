@@ -1,6 +1,6 @@
-package ch.omerixe.data.domain.ktor.di
+package ch.omerixe.data.network.ktor.di
 
-import ch.omerixe.data.domain.ktor.client
+import ch.omerixe.data.network.ktor.client
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
