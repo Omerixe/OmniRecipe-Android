@@ -1,13 +1,13 @@
 package ch.omerixe.data.domain
 
-import ch.omerixe.data.model.Recipe
-import ch.omerixe.data.model.RecipeSummary
+import ch.omerixe.data.model.network.NetworkRecipe
+import ch.omerixe.data.model.network.NetworkRecipeSummary
 
 interface OmniRecipeApi {
 
-    suspend fun getRecipeSummaries(): List<RecipeSummary>
+    suspend fun getRecipeSummaries(): List<NetworkRecipeSummary>
 
-    suspend fun getRecipes(): List<Recipe>
+    suspend fun getRecipes(): List<NetworkRecipe>
 
-    suspend fun getRecipe(id: String): Recipe
+    suspend fun getRecipe(id: String): NetworkRecipe
 }

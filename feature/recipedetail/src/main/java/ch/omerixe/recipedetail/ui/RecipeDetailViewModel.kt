@@ -5,7 +5,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.omerixe.data.domain.RecipeRepository
-import ch.omerixe.data.model.Recipe
+import ch.omerixe.data.model.network.NetworkIngredient
+import ch.omerixe.data.model.network.NetworkRecipe
 import ch.omerixe.ui.RecipeImage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,7 +54,7 @@ class RecipeDetailViewModel @Inject constructor(
     }
 }
 
-private fun Recipe.toUi() = RecipeDetail(
+private fun NetworkRecipe.toUi() = RecipeDetail(
     title = title,
     subtitle = subtitle,
     ingredients = ingredients.map { it.toUi() },
@@ -61,5 +62,5 @@ private fun Recipe.toUi() = RecipeDetail(
     recipeImage = RecipeImage.External(imageUrl),
 )
 
-private fun ch.omerixe.data.model.Ingredient.toUi() =
+private fun NetworkIngredient.toUi() =
     Ingredient(name, DecimalFormat("###.##").format(quantity), unit)

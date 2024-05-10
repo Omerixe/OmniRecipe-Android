@@ -1,16 +1,17 @@
 package ch.omerixe.data.domain
 
-import ch.omerixe.data.model.Recipe
+import ch.omerixe.data.model.network.NetworkRecipe
 import javax.inject.Inject
 
 
 class RecipeRepository @Inject constructor(private val omniRecipeApi: OmniRecipeApi) {
 
-    suspend fun getRecipes(): List<Recipe> {
+    suspend fun getRecipes(): List<NetworkRecipe> {
         return omniRecipeApi.getRecipes()
     }
 
-    suspend fun getRecipe(id: String): Result<Recipe> = runCatching { omniRecipeApi.getRecipe(id) }
+    suspend fun getRecipe(id: String): Result<NetworkRecipe> =
+        runCatching { omniRecipeApi.getRecipe(id) }
 
 }
 

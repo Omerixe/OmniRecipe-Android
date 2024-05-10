@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.omerixe.data.domain.RecipeSummaryRepository
-import ch.omerixe.data.model.RecipeSummary
+import ch.omerixe.data.model.network.NetworkRecipeSummary
 import ch.omerixe.ui.RecipeImage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,7 +48,7 @@ internal class OverviewViewModel @Inject constructor(
     }
 }
 
-private fun RecipeSummary.toUi(): RecipeOverview {
+private fun NetworkRecipeSummary.toUi(): RecipeOverview {
     return RecipeOverview(
         id = id,
         title = title,
