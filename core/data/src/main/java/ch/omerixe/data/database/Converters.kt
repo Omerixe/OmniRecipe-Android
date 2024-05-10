@@ -5,7 +5,7 @@ import ch.omerixe.data.database.model.DatabaseIngredient
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class Converters {
+internal class Converters {
 
     @TypeConverter
     fun fromStringToIngredientsList(value: String): List<DatabaseIngredient> {

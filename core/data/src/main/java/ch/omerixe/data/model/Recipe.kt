@@ -7,7 +7,7 @@ import ch.omerixe.data.model.external.Recipe
 import ch.omerixe.data.network.model.NetworkIngredient
 import ch.omerixe.data.network.model.NetworkRecipe
 
-fun NetworkRecipe.toExternalRecipe() = Recipe(
+internal fun NetworkRecipe.toExternalRecipe() = Recipe(
     id,
     title,
     subtitle,
@@ -17,7 +17,7 @@ fun NetworkRecipe.toExternalRecipe() = Recipe(
     version
 )
 
-fun Recipe.toEntity() = RecipeEntity(
+internal fun Recipe.toEntity() = RecipeEntity(
     id,
     title,
     subtitle,
@@ -27,13 +27,13 @@ fun Recipe.toEntity() = RecipeEntity(
     version
 )
 
-fun Ingredient.toDatabaseIngredient() = DatabaseIngredient(
+internal fun Ingredient.toDatabaseIngredient() = DatabaseIngredient(
     name,
     quantity,
     unit
 )
 
-fun RecipeEntity.toExternalRecipe() = Recipe(
+internal fun RecipeEntity.toExternalRecipe() = Recipe(
     id,
     title,
     subtitle,
@@ -43,7 +43,7 @@ fun RecipeEntity.toExternalRecipe() = Recipe(
     version
 )
 
-fun DatabaseIngredient.toExternalIngredient() = Ingredient(
+internal fun DatabaseIngredient.toExternalIngredient() = Ingredient(
     quantity,
     name,
     unit
