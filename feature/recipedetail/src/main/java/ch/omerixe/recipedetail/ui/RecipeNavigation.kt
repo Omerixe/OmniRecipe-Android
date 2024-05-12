@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RecipeDetailRoute(val id: String)
+data class RecipeDetailRoute(val id: String, val title: String)
 
 fun NavGraphBuilder.recipeDetailScreen(
     onNavigateUp: () -> Unit

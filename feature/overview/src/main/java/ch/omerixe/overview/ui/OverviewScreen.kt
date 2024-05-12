@@ -33,7 +33,8 @@ import ch.omerixe.ui.RecipeImage
 
 @Composable
 internal fun OverviewScreen(
-    uiState: OverviewViewModel.UiState, onNavigateToRecipeDetail: (recipeId: String) -> Unit
+    uiState: OverviewViewModel.UiState,
+    onNavigateToRecipeDetail: (recipeId: String, recipeTitle: String) -> Unit
 ) {
     when (uiState) {
         is OverviewViewModel.UiState.Loading -> {
@@ -48,7 +49,8 @@ internal fun OverviewScreen(
 
 @Composable
 private fun RecipeList(
-    uiState: OverviewViewModel.UiState.Content, onNavigateToRecipeDetail: (recipeId: String) -> Unit
+    uiState: OverviewViewModel.UiState.Content,
+    onNavigateToRecipeDetail: (recipeId: String, recipeTitle: String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
@@ -80,7 +82,10 @@ private fun RecipeList(
         items(uiState.recipes) { recipe ->
             RecipeCard(recipeOverview = recipe) { recipeId ->
                 Log.d("OverviewScreen", "Recipe clicked: $recipeId")
-                onNavigateToRecipeDetail(recipeId)
+                onNavigateToRecipeDetail(
+                    recipeId,
+                    uiState.recipes.first { it.id == recipeId }.title
+                )
             }
         }
     }
@@ -116,7 +121,7 @@ private fun PreviewOverviewScreen() {
                     ),
                 )
             )
-        ) {}
+        ) { _, _ -> }
     }
 }
 
@@ -135,13 +140,13 @@ private fun ErrorPreview() {
                 ),
             ), OverviewViewModel.UiError.UNSPECIFIED
         )
-    ) {}
+    ) { _, _ -> }
 }
 
 
 @Preview
 @Composable
 private fun LoadingPreview() {
-    OverviewScreen(OverviewViewModel.UiState.Loading) {}
+    OverviewScreen(OverviewViewModel.UiState.Loading) { _, _ -> }
 }
 

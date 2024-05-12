@@ -2,6 +2,7 @@ package ch.omerixe.recipedetail.ui
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -38,7 +40,6 @@ import coil.compose.AsyncImage
 
 private val imageHeight = 250.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecipeDetailScreen(
     uiState: RecipeDetailViewModel.UiState,
@@ -51,38 +52,73 @@ internal fun RecipeDetailScreen(
     Scaffold() { padding ->
         when (uiState) {
             is RecipeDetailViewModel.UiState.Loading -> {
-                Loading()
+                Column {
+                    topAppBar(
+                        toolbarAlpha,
+                        { Text(uiState.recipeName) },
+                        surfaceColor,
+                        onNavigateUp,
+                        padding
+                    )
+                    Loading()
+                }
             }
 
             is RecipeDetailViewModel.UiState.Content -> {
                 RecipeComponent(uiState, scrollState)
+                val title = @Composable {
+                    if (toolbarAlpha == 1f) {
+                        Text(uiState.recipeName)
+                    }
+                }
+                topAppBar(toolbarAlpha, title, surfaceColor, onNavigateUp, padding)
             }
 
             is RecipeDetailViewModel.UiState.Error -> {
-                ErrorBox(message = uiState.type.message(), modifier = Modifier.padding(padding))
+                Column {
+                    topAppBar(
+                        toolbarAlpha,
+                        { Text(uiState.recipeName) },
+                        surfaceColor,
+                        onNavigateUp,
+                        padding
+                    )
+                    ErrorBox(message = uiState.type.message(), modifier = Modifier.padding(padding))
+                }
             }
         }
-        TopAppBar(
-            title = {},
-            colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = surfaceColor),
-            navigationIcon = {
-                IconButton(
-                    onClick = onNavigateUp,
-                    colors = IconButtonDefaults.iconButtonColors().copy(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
-                            .copy(alpha = 1 - toolbarAlpha),
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.navigate_up_description)
-                    )
-                }
-            },
-            modifier = Modifier.padding(padding)
-        )
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun topAppBar(
+    toolbarAlpha: Float,
+    title: @Composable () -> Unit,
+    surfaceColor: Color,
+    onNavigateUp: () -> Unit,
+    padding: PaddingValues
+) {
+    TopAppBar(
+        title = title,
+        colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = surfaceColor),
+        navigationIcon = {
+            IconButton(
+                onClick = onNavigateUp,
+                colors = IconButtonDefaults.iconButtonColors().copy(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                        .copy(alpha = 1 - toolbarAlpha),
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = stringResource(R.string.navigate_up_description)
+                )
+            }
+        },
+        modifier = Modifier.padding(padding)
+    )
 }
 
 @Composable
@@ -205,6 +241,9 @@ private fun RecipeDetailScreenPreview() {
 @Composable
 fun RecipeDetailScreenErrorPreview() {
     RecipeDetailScreen(
-        uiState = RecipeDetailViewModel.UiState.Error(RecipeDetailViewModel.UiError.UNSPECIFIED)
+        uiState = RecipeDetailViewModel.UiState.Error(
+            RecipeDetailViewModel.UiError.UNSPECIFIED,
+            "Recipe Title"
+        )
     ) {}
 }

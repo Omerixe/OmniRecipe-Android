@@ -22,8 +22,8 @@ fun NavGraph(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        overviewScreen(onNavigateToRecipeDetail = { recipeId ->
-            navController.navigate(RecipeDetailRoute(recipeId))
+        overviewScreen(onNavigateToRecipeDetail = { recipeId, recipeTitle ->
+            navController.navigate(RecipeDetailRoute(recipeId, recipeTitle))
         })
 
         recipeDetailScreen(onNavigateUp = {

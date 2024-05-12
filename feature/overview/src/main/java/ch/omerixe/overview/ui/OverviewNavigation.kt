@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 object OverviewRoute
 
 fun NavGraphBuilder.overviewScreen(
-    onNavigateToRecipeDetail: (recipeId: String) -> Unit
+    onNavigateToRecipeDetail: (recipeId: String, recipeTitle: String) -> Unit
 ) {
     composable<OverviewRoute> {
         val viewModel: OverviewViewModel = hiltViewModel()

@@ -25,8 +25,9 @@ class RecipeDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val route = savedStateHandle.toRoute<RecipeDetailRoute>()
     private val recipeId: String = route.id
+    private val recipeTitle: String = route.title
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading(recipeTitle))
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -38,17 +39,16 @@ class RecipeDetailViewModel @Inject constructor(
                 onFailure = {
                     // We can do more error handling here
                     Log.d(TAG, "Error fetching recipe", it)
-                    _uiState.value = UiState.Error(UiError.UNSPECIFIED)
+                    _uiState.value = UiState.Error(UiError.UNSPECIFIED, recipeTitle)
                 }
             )
         }
     }
 
-    sealed class UiState {
-        data object Loading : UiState()
-        data class Content(val recipeDetail: RecipeDetail) : UiState()
-
-        data class Error(val type: UiError) : UiState()
+    sealed class UiState(open val recipeName: String) {
+        data class Loading(override val recipeName: String) : UiState(recipeName)
+        data class Content(val recipeDetail: RecipeDetail) : UiState(recipeDetail.title)
+        data class Error(val type: UiError, override val recipeName: String) : UiState(recipeName)
     }
 
     enum class UiError {
