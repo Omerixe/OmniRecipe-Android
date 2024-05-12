@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.serialization)
     kotlin("kapt")
 }
 
@@ -50,6 +51,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.compose)
+    implementation(libs.kotlinx.serialization)
 
     kapt(libs.hilt.android.compiler)
 

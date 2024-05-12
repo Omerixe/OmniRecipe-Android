@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import ch.omerixe.data.domain.RecipeRepository
 import ch.omerixe.data.model.external.Ingredient
 import ch.omerixe.data.model.external.Recipe
@@ -22,7 +23,8 @@ class RecipeDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val recipeRepository: RecipeRepository,
 ) : ViewModel() {
-    private val recipeId: String = RecipeArgs(savedStateHandle).recipeId
+    private val route = savedStateHandle.toRoute<RecipeDetailRoute>()
+    private val recipeId: String = route.id
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
