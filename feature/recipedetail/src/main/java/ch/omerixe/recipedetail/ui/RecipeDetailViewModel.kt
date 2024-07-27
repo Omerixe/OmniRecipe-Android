@@ -45,6 +45,12 @@ class RecipeDetailViewModel @Inject constructor(
         }
     }
 
+    fun delete() {
+        viewModelScope.launch {
+            recipeRepository.deleteRecipe(recipeId)
+        }
+    }
+
     sealed class UiState(open val recipeName: String) {
         data class Loading(override val recipeName: String) : UiState(recipeName)
         data class Content(val recipeDetail: RecipeDetail) : UiState(recipeDetail.title)

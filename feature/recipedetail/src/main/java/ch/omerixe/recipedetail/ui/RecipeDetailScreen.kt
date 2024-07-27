@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,7 +47,8 @@ private val imageHeight = 250.dp
 @Composable
 internal fun RecipeDetailScreen(
     uiState: RecipeDetailViewModel.UiState,
-    onNavigateUp: () -> Unit
+    onNavigateUp: () -> Unit,
+    onDelete: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val toolbarAlpha = alphaFromScrollState(scrollState)
@@ -61,6 +63,7 @@ internal fun RecipeDetailScreen(
                         { Text(uiState.recipeName) },
                         surfaceColor,
                         onNavigateUp,
+                        onDelete,
                         padding
                     )
                     Loading()
@@ -74,7 +77,7 @@ internal fun RecipeDetailScreen(
                         Text(uiState.recipeName)
                     }
                 }
-                TopAppBar(toolbarAlpha, title, surfaceColor, onNavigateUp, padding)
+                TopAppBar(toolbarAlpha, title, surfaceColor, onNavigateUp, onDelete, padding)
             }
 
             is RecipeDetailViewModel.UiState.Error -> {
@@ -84,6 +87,7 @@ internal fun RecipeDetailScreen(
                         { Text(uiState.recipeName) },
                         surfaceColor,
                         onNavigateUp,
+                        onDelete,
                         padding
                     )
                     ErrorBox(message = uiState.type.message(), modifier = Modifier.padding(padding))
@@ -100,6 +104,7 @@ private fun TopAppBar(
     title: @Composable () -> Unit,
     surfaceColor: Color,
     onNavigateUp: () -> Unit,
+    onDelete: () -> Unit,
     padding: PaddingValues
 ) {
     TopAppBar(
@@ -117,6 +122,21 @@ private fun TopAppBar(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.navigate_up_description)
+                )
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = onDelete,
+                colors = IconButtonDefaults.iconButtonColors().copy(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                        .copy(alpha = 1 - toolbarAlpha),
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Delete,
+                    contentDescription = stringResource(R.string.detail_delete)
                 )
             }
         },
@@ -246,8 +266,10 @@ private fun RecipeDetailScreenPreview() {
                     "Blend until smooth",
                 ),
             )
-        )
-    ) {}
+        ),
+        onNavigateUp = {},
+        onDelete = {}
+    )
 }
 
 @Preview
@@ -257,6 +279,8 @@ fun RecipeDetailScreenErrorPreview() {
         uiState = RecipeDetailViewModel.UiState.Error(
             RecipeDetailViewModel.UiError.UNSPECIFIED,
             "Recipe Title"
-        )
-    ) {}
+        ),
+        onNavigateUp = {},
+        onDelete = {}
+    )
 }

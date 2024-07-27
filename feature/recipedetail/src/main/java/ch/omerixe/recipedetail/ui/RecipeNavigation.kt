@@ -17,7 +17,12 @@ fun NavGraphBuilder.recipeDetailScreen(
         val uiState = viewModel.uiState.collectAsState()
         RecipeDetailScreen(
             uiState = uiState.value,
-            onNavigateUp = onNavigateUp
+            onNavigateUp = onNavigateUp,
+            onDelete = {
+                //Todo: Add more sophisticated success handling and closing logic here
+                viewModel.delete()
+                onNavigateUp()
+            },
         )
     }
 }
