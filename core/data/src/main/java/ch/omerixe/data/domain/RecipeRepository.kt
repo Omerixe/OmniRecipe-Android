@@ -44,5 +44,20 @@ class RecipeRepository @Inject constructor(
         }
     }
 
+    suspend fun deleteRecipe(id: String) {
+        withContext(ioDispatcher) {
+            val result = runCatching { omniRecipeApi.deleteRecipe(id) }
+            result.fold(
+                onSuccess = {
+                    val recipe = omniDatabase.recipeDao().findById(id)
+                    recipe?.let { omniDatabase.recipeDao().delete(it) }
+                },
+                onFailure = { throwable ->
+                    Log.d(TAG, "Fallback to offline data", throwable)
+                }
+            )
+        }
+    }
+
 }
 

@@ -5,6 +5,7 @@ import ch.omerixe.data.network.model.NetworkRecipe
 import ch.omerixe.data.network.model.NetworkRecipeSummary
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import javax.inject.Inject
 
@@ -17,6 +18,10 @@ internal class OmniRecipeKtorApi @Inject constructor(private val httpClient: Htt
 
     override suspend fun getRecipe(id: String): NetworkRecipe {
         return httpClient.get("recipe/$id").body()
+    }
+
+    override suspend fun deleteRecipe(id: String) {
+        httpClient.delete("recipe/$id")
     }
 
     override suspend fun getRecipeSummaries(): List<NetworkRecipeSummary> {

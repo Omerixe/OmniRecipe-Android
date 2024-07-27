@@ -10,4 +10,6 @@ interface OmniRecipeApi {
     suspend fun getRecipes(): List<NetworkRecipe>
 
     suspend fun getRecipe(id: String): NetworkRecipe
+
+    suspend fun deleteRecipe(id: String)
 }

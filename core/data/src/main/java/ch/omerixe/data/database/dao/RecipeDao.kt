@@ -1,6 +1,7 @@
 package ch.omerixe.data.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -16,5 +17,9 @@ interface RecipeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg recipes: RecipeEntity)
+
+    @Delete()
+    fun delete(recipe: RecipeEntity)
+
 
 }

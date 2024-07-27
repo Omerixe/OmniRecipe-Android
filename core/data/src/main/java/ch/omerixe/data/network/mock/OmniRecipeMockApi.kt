@@ -42,4 +42,8 @@ internal class OmniRecipeMockApi @Inject constructor(
         return recipes.first { it.id == id }
     }
 
+    override suspend fun deleteRecipe(id: String) {
+        delay(300)
+    }
+
 }
