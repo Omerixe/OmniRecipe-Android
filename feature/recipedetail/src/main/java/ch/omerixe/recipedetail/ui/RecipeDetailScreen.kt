@@ -1,6 +1,7 @@
 package ch.omerixe.recipedetail.ui
 
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -24,6 +26,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -53,7 +56,7 @@ internal fun RecipeDetailScreen(
         when (uiState) {
             is RecipeDetailViewModel.UiState.Loading -> {
                 Column {
-                    topAppBar(
+                    TopAppBar(
                         toolbarAlpha,
                         { Text(uiState.recipeName) },
                         surfaceColor,
@@ -71,12 +74,12 @@ internal fun RecipeDetailScreen(
                         Text(uiState.recipeName)
                     }
                 }
-                topAppBar(toolbarAlpha, title, surfaceColor, onNavigateUp, padding)
+                TopAppBar(toolbarAlpha, title, surfaceColor, onNavigateUp, padding)
             }
 
             is RecipeDetailViewModel.UiState.Error -> {
                 Column {
-                    topAppBar(
+                    TopAppBar(
                         toolbarAlpha,
                         { Text(uiState.recipeName) },
                         surfaceColor,
@@ -92,7 +95,7 @@ internal fun RecipeDetailScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun topAppBar(
+private fun TopAppBar(
     toolbarAlpha: Float,
     title: @Composable () -> Unit,
     surfaceColor: Color,
@@ -153,61 +156,71 @@ private fun RecipeComponent(
                 .fillMaxWidth()
                 .height(imageHeight)
         )
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(12.dp)) {
             Text(
                 text = recipeDetail.title,
                 style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
             )
             Text(
                 text = recipeDetail.subtitle,
                 style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.detail_ingredients_heading),
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Row {
-                Column {
-                    recipeDetail.ingredients.forEach { ingredient ->
-                        Text(
-                            text = ingredient.quantity,
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Column {
-                    recipeDetail.ingredients.forEach { ingredient ->
-                        Text(
-                            text = ingredient.unit,
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Column {
-                    recipeDetail.ingredients.forEach { ingredient ->
-                        Text(
-                            text = ingredient.name,
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
-                }
-            }
+            IngredientComponent(recipeDetail)
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = stringResource(R.string.detail_steps_heading),
                 style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
             )
             recipeDetail.steps.forEachIndexed { index, step ->
                 Text(
                     text = "${index + 1}. $step",
                     style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(start = 4.dp, end = 4.dp),
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun IngredientComponent(recipeDetail: RecipeDetail) {
+    Column(
+        Modifier
+            .clip(RoundedCornerShape(4.dp))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .fillMaxWidth()
+            .padding(4.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.detail_ingredients_heading),
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            Column {
+                recipeDetail.ingredients.forEach { ingredient ->
+                    Text(
+                        text = "${ingredient.quantity} ${ingredient.unit}",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.width(64.dp))
+
+            Column {
+                recipeDetail.ingredients.forEach { ingredient ->
+                    Text(
+                        text = ingredient.name,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
+        }
+
     }
 }
 
