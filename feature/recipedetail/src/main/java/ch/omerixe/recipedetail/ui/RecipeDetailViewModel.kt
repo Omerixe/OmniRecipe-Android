@@ -10,7 +10,9 @@ import ch.omerixe.data.model.external.Ingredient
 import ch.omerixe.data.model.external.Recipe
 import ch.omerixe.ui.RecipeImage
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -30,6 +32,10 @@ class RecipeDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading(recipeTitle))
     val uiState = _uiState.asStateFlow()
 
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
+
+
     init {
         viewModelScope.launch {
             recipeRepository.getRecipe(recipeId).fold(
@@ -47,7 +53,9 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun delete() {
         viewModelScope.launch {
+            _uiState.value = UiState.Loading(recipeTitle)
             recipeRepository.deleteRecipe(recipeId)
+            _uiEvent.emit(UiEvent.RECIPE_DELETED)
         }
     }
 
@@ -59,6 +67,10 @@ class RecipeDetailViewModel @Inject constructor(
 
     enum class UiError {
         UNSPECIFIED
+    }
+
+    enum class UiEvent {
+        RECIPE_DELETED
     }
 }
 

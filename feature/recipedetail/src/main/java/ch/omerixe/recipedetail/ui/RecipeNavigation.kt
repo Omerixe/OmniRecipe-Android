@@ -15,14 +15,13 @@ fun NavGraphBuilder.recipeDetailScreen(
     composable<RecipeDetailRoute> { _ ->
         val viewModel: RecipeDetailViewModel = hiltViewModel()
         val uiState = viewModel.uiState.collectAsState()
+        val uiEvent = viewModel.uiEvent.collectAsState(initial = null)
+
         RecipeDetailScreen(
             uiState = uiState.value,
+            uiEvent = uiEvent.value,
             onNavigateUp = onNavigateUp,
-            onDelete = {
-                //Todo: Add more sophisticated success handling and closing logic here
-                viewModel.delete()
-                onNavigateUp()
-            },
+            onDelete = viewModel::delete
         )
     }
 }

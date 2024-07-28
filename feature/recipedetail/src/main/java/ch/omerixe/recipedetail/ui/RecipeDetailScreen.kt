@@ -1,5 +1,6 @@
 package ch.omerixe.recipedetail.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,10 +27,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,12 +50,29 @@ private val imageHeight = 250.dp
 @Composable
 internal fun RecipeDetailScreen(
     uiState: RecipeDetailViewModel.UiState,
+    uiEvent: RecipeDetailViewModel.UiEvent?,
     onNavigateUp: () -> Unit,
     onDelete: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val toolbarAlpha = alphaFromScrollState(scrollState)
     val surfaceColor = MaterialTheme.colorScheme.surface.copy(alpha = toolbarAlpha)
+    val context = LocalContext.current
+
+    LaunchedEffect(uiEvent) {
+        when (uiEvent) {
+            RecipeDetailViewModel.UiEvent.RECIPE_DELETED -> {
+                Toast.makeText(
+                    context,
+                    R.string.detail_delete_success,
+                    Toast.LENGTH_SHORT
+                ).show()
+                onNavigateUp()
+            }
+
+            null -> {}
+        }
+    }
 
     Scaffold() { padding ->
         when (uiState) {
@@ -267,6 +287,7 @@ private fun RecipeDetailScreenPreview() {
                 ),
             )
         ),
+        uiEvent = null,
         onNavigateUp = {},
         onDelete = {}
     )
@@ -280,6 +301,7 @@ fun RecipeDetailScreenErrorPreview() {
             RecipeDetailViewModel.UiError.UNSPECIFIED,
             "Recipe Title"
         ),
+        uiEvent = null,
         onNavigateUp = {},
         onDelete = {}
     )
