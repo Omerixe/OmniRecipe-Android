@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import ch.omerixe.data.domain.Coordinator
 import ch.omerixe.data.domain.RecipeRepository
 import ch.omerixe.data.model.external.Ingredient
 import ch.omerixe.data.model.external.Recipe
@@ -24,6 +25,7 @@ private const val TAG = "RecipeDetailViewModel"
 class RecipeDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val recipeRepository: RecipeRepository,
+    private val coordinator: Coordinator,
 ) : ViewModel() {
     private val route = savedStateHandle.toRoute<RecipeDetailRoute>()
     private val recipeId: String = route.id
@@ -56,6 +58,7 @@ class RecipeDetailViewModel @Inject constructor(
             _uiState.value = UiState.Loading(recipeTitle)
             recipeRepository.deleteRecipe(recipeId)
             _uiEvent.emit(UiEvent.RECIPE_DELETED)
+            coordinator.reloadOverview()
         }
     }
 

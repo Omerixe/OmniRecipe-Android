@@ -3,6 +3,7 @@ package ch.omerixe.overview.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ch.omerixe.data.domain.Coordinator
 import ch.omerixe.data.domain.RecipeSummaryRepository
 import ch.omerixe.data.model.external.RecipeSummary
 import ch.omerixe.ui.RecipeImage
@@ -16,7 +17,8 @@ private const val TAG = "OverviewViewModel"
 
 @HiltViewModel
 internal class OverviewViewModel @Inject constructor(
-    private val recipeSummaryRepository: RecipeSummaryRepository
+    private val recipeSummaryRepository: RecipeSummaryRepository,
+    private val coordinator: Coordinator
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
@@ -24,17 +26,25 @@ internal class OverviewViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            recipeSummaryRepository.getRecipeSummaries().fold(
-                onSuccess = { summaries ->
-                    _uiState.value = UiState.Content(summaries.map { it.toUi() })
-                },
-                onFailure = {
-                    // We can do more error handling here
-                    Log.d(TAG, "Error fetching recipes", it)
-                    _uiState.value = UiState.Content(emptyList(), UiError.UNSPECIFIED)
-                }
-            )
+            loadRecipes()
+            coordinator.reloadOverview.collect {
+                _uiState.value = UiState.Loading
+                loadRecipes()
+            }
         }
+    }
+
+    private suspend fun loadRecipes() {
+        recipeSummaryRepository.getRecipeSummaries().fold(
+            onSuccess = { summaries ->
+                _uiState.value = UiState.Content(summaries.map { it.toUi() })
+            },
+            onFailure = {
+                // We can do more error handling here
+                Log.d(TAG, "Error fetching recipes", it)
+                _uiState.value = UiState.Content(emptyList(), UiError.UNSPECIFIED)
+            }
+        )
     }
 
     sealed class UiState {
