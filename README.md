@@ -43,8 +43,8 @@ offline usage, but the app is not built "offline-first".
 
 ## Setup
 
-I will soon provide a way to run the app without the need to set up the backend yourself by using a
-mock backend.
+The app uses mock data by default. This means you can navigate within the app but you can't change
+any data.
 
 1. Clone the repository
 2. Build and run the app
@@ -53,6 +53,13 @@ mock backend.
 If you want to run the app with the real server, you need to set up the backend as well.
 Before you run the app, you need to set it up to use the real server.
 
+### Using environment variables
+
+1. Set `API_URL` to the url of your server
+2. Set `API_KEY` to the api key of your server
+3. Set `USE_MOCK`to `false`
+
+### Using local values
 1. In the `build.gradle.kts` file of the `app` module, change the `useMockBackend` variable
    to `false`.
 2. Create a `secrets.properties` file in the root directory of the project

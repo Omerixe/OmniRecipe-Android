@@ -10,11 +10,12 @@ plugins {
 }
 
 // Change this property if you want to switch to the real server implementation
-val useMockServer = true
+// Can also be changed by setting `USE_MOCK` environment variable to true or false
 
 // Make sure your secrets.properties file is in the root project directory and contains the following key/value pairs:
 // API_KEY=yourApiKey
 // API_URL=https://yourApiUrl.com
+// Can also be changed by setting `API_KEY` and `API_URL` enviroment variables
 val apikeyPropertiesFile = rootProject.file("secrets.properties")
 val apikeyProperties = Properties()
 apikeyProperties.load(FileInputStream(apikeyPropertiesFile))
@@ -32,17 +33,20 @@ android {
         buildConfigField(
             "String",
             "API_KEY",
-            apikeyProperties.getProperty("API_KEY", "defaultApiKey")
+            System.getenv("API_KEY") ?: apikeyProperties.getProperty("API_KEY", "defaultApiKey")
         )
         buildConfigField(
             "String",
             "API_URL",
-            apikeyProperties.getProperty("API_URL", "https://www.example.com")
+            System.getenv("API_URL") ?: apikeyProperties.getProperty(
+                "API_URL",
+                "https://www.example.com"
+            )
         )
         buildConfigField(
             "Boolean",
             "USE_MOCK",
-            useMockServer.toString()
+            System.getenv("USE_MOCK") ?: useMockServer.toString()
         )
     }
 
